@@ -108,54 +108,8 @@ MLForge automates this entire workflow — a user uploads a dataset, and the pla
 
 ---
 
-## 📅 Build Roadmap (Phased Approach)
 
-### Phase 1: Foundation (Week 1)
-- [ ] Set up FastAPI backend skeleton + PostgreSQL schema
-- [ ] Build file upload endpoint (CSV parsing with Pandas)
-- [ ] Auto-detect column types (numeric/categorical/datetime)
-- [ ] Basic React frontend with upload UI + dataset preview table
-
-### Phase 2: Preprocessing Pipeline (Week 2)
-- [ ] Implement missing value imputation strategies
-- [ ] Implement encoding strategies (one-hot, label)
-- [ ] Implement scaling strategies
-- [ ] Build a "preprocessing config" UI so users can toggle techniques
-- [ ] Unit test preprocessing functions on 2-3 sample datasets (Titanic, Iris, a regression dataset)
-
-### Phase 3: Model Training Engine (Week 3)
-- [ ] Implement training loop for classification algorithms
-- [ ] Implement training loop for regression algorithms
-- [ ] Build cross-validation + metric calculation logic
-- [ ] Store results in PostgreSQL (model name, metrics, training time)
-- [ ] Build leaderboard API endpoint
-
-### Phase 4: Hyperparameter Optimization (Week 4)
-- [ ] Integrate Optuna for top 2-3 models from leaderboard
-- [ ] Define search spaces per algorithm
-- [ ] Store best hyperparameters + re-trained model
-
-### Phase 5: Explainability (Week 5)
-- [ ] Integrate SHAP for tree-based models (TreeExplainer — fastest)
-- [ ] Generate summary plots (global importance)
-- [ ] Generate force plots (single prediction explanation)
-- [ ] Convert SHAP values into plain-English insight sentences (simple template-based NLG is fine to start)
-
-### Phase 6: Dashboard Polish (Week 6)
-- [ ] Build experiment tracking view (live status of training)
-- [ ] Build performance comparison charts (Recharts/Plotly)
-- [ ] Build exportable report generation (PDF via a Python lib like `reportlab` or `weasyprint`)
-- [ ] Add loading states, error handling, empty states
-
-### Phase 7: Deployment & Documentation (Week 7)
-- [ ] Deploy backend (Render/Railway free tier)
-- [ ] Deploy frontend (Vercel/Netlify)
-- [ ] Write final README, add architecture diagram, add demo GIF/video
-- [ ] Record a 2-3 min demo video for your portfolio
-
----
-
-## 📁 Suggested Folder Structure
+## 📁  Folder Structure
 
 ```
 mlforge/
@@ -190,32 +144,6 @@ mlforge/
 
 ---
 
-## 🗣️ Interview Talking Points (know these cold)
-
-**"Why did you build this?"**
-Manually building ML models is repetitive and time-consuming — I wanted to automate the repetitive 80% (preprocessing, model comparison, tuning) so more time goes into problem framing and interpreting results, which is where the real value is.
-
-**"Why SHAP over LIME?"**
-SHAP is grounded in game theory (Shapley values) and gives mathematically consistent, additive explanations — meaning feature contributions sum up to the actual prediction. LIME approximates locally but isn't always consistent across similar instances.
-
-**"Why Optuna over GridSearch?"**
-GridSearch is exhaustive and slow — it tries every combination blindly. Optuna uses Bayesian optimization (specifically Tree-structured Parzen Estimators) to intelligently pick the next hyperparameter set based on past trial performance, converging to good results in far fewer trials.
-
-**"How do you handle a dataset where the target column isn't specified?"**
-The platform should let the user select the target column explicitly on upload, then infer the task type (classification vs. regression) based on the target's data type and cardinality (e.g., a numeric column with only 2-10 unique values → classification).
-
-**"What happens if two models score similarly on accuracy?"**
-This is exactly why the leaderboard shouldn't rank on a single metric alone — I'd show training time, inference time, and interpretability trade-offs too, so the "best" model depends on the business context, not just raw accuracy.
-
----
-
-## 🚀 Stretch Goals (if you have extra time)
-- AutoML-style automated model selection (like an "auto-pilot" mode that picks preprocessing + model combo automatically based on dataset characteristics)
-- Support for time-series datasets (auto-detect datetime index, suggest Prophet/ARIMA)
-- User authentication + saved experiment history per user
-- Docker Compose setup for one-command local deployment
-
----
 
 ## 📝 Notes for Yourself
 - Don't try to build all 20+ preprocessing techniques and 10+ algorithms on day one — get a **thin end-to-end slice working first** (1 preprocessing technique, 2 algorithms, basic SHAP) before scaling up breadth. A working thin pipeline beats a half-built wide one, especially if you need to demo this soon.
