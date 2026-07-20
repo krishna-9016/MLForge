@@ -144,7 +144,3 @@ mlforge/
 
 ---
 
-
-## 📝 Notes for Yourself
-- Don't try to build all 20+ preprocessing techniques and 10+ algorithms on day one — get a **thin end-to-end slice working first** (1 preprocessing technique, 2 algorithms, basic SHAP) before scaling up breadth. A working thin pipeline beats a half-built wide one, especially if you need to demo this soon.
-- Keep a `sample_datasets/` folder with 2-3 clean test datasets (Titanic for classification, Boston Housing/California Housing for regression) so you can demo reliably without depending on user uploads during interviews.
